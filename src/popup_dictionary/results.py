@@ -151,7 +151,7 @@ def get_note_snippets_for(term: str, ignore_nid: str) -> Union[List[str], bool, 
         exclusion_tokens.append("-is:new")
 
     # construct query string
-    query = """"{}" {}""".format(term, " ".join(exclusion_tokens))
+    query = """"{}:*{}*" {}""".format(conf["dictionaryTermFieldName"], term, " ".join(exclusion_tokens))
 
     # NOTE: performing the SQL query directly might be faster
     res = sorted(find_notes(collection=mw.col, query=query))
